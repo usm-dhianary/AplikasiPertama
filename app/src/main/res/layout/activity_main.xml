@@ -72,6 +72,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"
-        android:backgroundTint="#E91E63"
+        android:backgroundTint="#F44336"
         android:text="DAFTAR" />
 </LinearLayout>
