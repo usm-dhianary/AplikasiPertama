@@ -9,6 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PendaftaranActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +46,20 @@ class PendaftaranActivity : AppCompatActivity() {
                 val fullName = "$firstnameText $lastnameText".trim()
                 val displayName = if (usernameText.isNotBlank()) usernameText else fullName
 
+                //ini harus didalam logika password sama
+                val userEntity = UserEntity(
+                    username = usernameText,
+                    email = emailText,
+                    namadepan = firstnameText,
+                    namabelakang = lastnameText,
+                    password = passwordText
+                )
+
+                val db = AbsensiDatabase.getDatabase(this)
+                lifecycleScope.launch(Dispatchers.IO){
+                    db.userDao().insertUser(userEntity)
+                }
+
                 Toast.makeText(
                     this,
                     "User $displayName berhasil didaftarkan",
@@ -58,6 +75,9 @@ class PendaftaranActivity : AppCompatActivity() {
                 intentPindahDashboard.putExtra("NAMA BELAKANG", lastnameText)
 
                 startActivity(intentPindahDashboard)
+
+
+
 
             }
         }
