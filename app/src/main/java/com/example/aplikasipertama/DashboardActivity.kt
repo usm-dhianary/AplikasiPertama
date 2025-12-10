@@ -6,27 +6,43 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DashboardActivity : AppCompatActivity() {
+    private lateinit var userDao: UserDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
 
-        val username = intent.getStringExtra("USERNAME")
-        val email = intent.getStringExtra("EMAIL")
-        val nama_depan = intent.getStringExtra("NAMA DEPAN")
-        val nama_belakang = intent.getStringExtra("NAMA BELAKANG")
+        //val username = intent.getStringExtra("USERNAME")
+        //val email = intent.getStringExtra("EMAIL")
+        //val nama_depan = intent.getStringExtra("NAMA DEPAN")
+        //val nama_belakang = intent.getStringExtra("NAMA BELAKANG")
+
+        val db = AbsensiDatabase.getDatabase(this)
+        userDao = db.userDao()
+
+        val id = intent.getIntExtra("ID", 0)
 
         val tvUsername = findViewById<TextView>(R.id.tvUsername)
         val tvEmail = findViewById<TextView>(R.id.tvEmail)
         val tvFirstname = findViewById<TextView>(R.id.tvFirstname)
         val tvLastname = findViewById<TextView>(R.id.tvLastname)
 
-        tvUsername.text = username
-        tvEmail.text = email
-        tvFirstname.text = nama_depan
-        tvLastname.text = nama_belakang
+        lifecycleScope.launch(Dispatchers.IO){
+            val user = userDao.getUserById(id)
+            withContext(Dispatchers.Main){
+                tvUsername.text = user.username
+                tvEmail.text = user.email
+                tvFirstname.text = user.namadepan
+                tvLastname.text = user.namadepan
+            }
+
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
