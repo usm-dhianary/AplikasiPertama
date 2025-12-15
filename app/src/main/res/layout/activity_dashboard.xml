@@ -98,7 +98,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
-                android:name="com.example.aplikasipertama.OsmMapFregment"
+                android:name="com.example.aplikasipertama.OsmMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="300sp"
                 android:layout_marginTop="20sp" />
