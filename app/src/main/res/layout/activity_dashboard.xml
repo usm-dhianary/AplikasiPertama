@@ -96,13 +96,20 @@
                 android:layout_marginTop="5sp"
                 android:text="TextView" />
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView"
+                android:name="com.example.aplikasipertama.OsmMapFregment"
+                android:layout_width="match_parent"
+                android:layout_height="300sp"
+                android:layout_marginTop="20sp" />
+
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:backgroundTint="#E91E63"
-                android:text="LOGOUT" />
+                android:text="ABSEN" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
