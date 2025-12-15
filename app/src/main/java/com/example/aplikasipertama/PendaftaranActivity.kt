@@ -67,14 +67,14 @@ class PendaftaranActivity : AppCompatActivity() {
                 ).show()
 
                 //pindah ke halaman dashborad
-                val intentPindahDashboard = Intent(this, DashboardActivity::class.java)
-
-                intentPindahDashboard.putExtra("USERNAME", usernameText)
-                intentPindahDashboard.putExtra("EMAIL", emailText)
-                intentPindahDashboard.putExtra("NAMA DEPAN", firstnameText)
-                intentPindahDashboard.putExtra("NAMA BELAKANG", lastnameText)
-
-                startActivity(intentPindahDashboard)
+//                val intentPindahDashboard = Intent(this, DashboardActivity::class.java)
+//
+//                intentPindahDashboard.putExtra("USERNAME", usernameText)
+//                intentPindahDashboard.putExtra("EMAIL", emailText)
+//                intentPindahDashboard.putExtra("NAMA DEPAN", firstnameText)
+//                intentPindahDashboard.putExtra("NAMA BELAKANG", lastnameText)
+//
+//                startActivity(intentPindahDashboard)
 
 
 
