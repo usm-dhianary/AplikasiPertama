@@ -23,6 +23,7 @@ class PendaftaranActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.editTextEmail)
         val firstname = findViewById<EditText>(R.id.editFirstName)
         val lastname = findViewById<EditText>(R.id.editLastName)
+        val alamat = findViewById<EditText>(R.id.editTextAlamat)
         val password = findViewById<EditText>(R.id.editPassword)
         val passwordlagi = findViewById<EditText>(R.id.editPasswordLagi)
 
@@ -32,11 +33,13 @@ class PendaftaranActivity : AppCompatActivity() {
             var emailText = email.text.toString()
             var firstnameText = firstname.text.toString()
             var lastnameText = lastname.text.toString()
+            var alamatText = alamat.text.toString()
             var passwordText = password.text.toString()
             var passwordlagiText = passwordlagi.text.toString()
 
 
-            if (usernameText.isBlank() || emailText.isBlank() || firstnameText.isBlank() || lastnameText.isBlank() || passwordText.isBlank() || passwordlagiText.isBlank()) {
+            if (usernameText.isBlank() || emailText.isBlank() || firstnameText.isBlank() || lastnameText.isBlank() ||
+                alamatText.isBlank() || passwordText.isBlank() || passwordlagiText.isBlank()) {
                 Toast.makeText(
                     this,
                     "Semua Filed Input Harus Diisi",
@@ -46,12 +49,18 @@ class PendaftaranActivity : AppCompatActivity() {
                 val fullName = "$firstnameText $lastnameText".trim()
                 val displayName = if (usernameText.isNotBlank()) usernameText else fullName
 
+                if (passwordText != passwordlagiText) {
+                    Toast.makeText(this, "Password tidak sama", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
                 //ini harus didalam logika password sama
                 val userEntity = UserEntity(
                     username = usernameText,
                     email = emailText,
                     namadepan = firstnameText,
                     namabelakang = lastnameText,
+                    alamat = alamatText,
                     password = passwordText
                 )
 
